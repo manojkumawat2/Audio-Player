@@ -54,12 +54,12 @@ const AudioPlayer = () => {
 
   // Handle next play
   const handleNextPlay = () => {
-    handleChangeTrack("next");
+    handleChangeTrack({ type: "next" });
   };
 
   // Handle prev play
   const handlePrevPlay = () => {
-    handleChangeTrack("prev");
+    handleChangeTrack({ type: "prev" });
   };
 
   const getTime = (seconds) => {

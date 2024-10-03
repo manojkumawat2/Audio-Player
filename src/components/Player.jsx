@@ -1,6 +1,7 @@
 import AudioPlayer from "./AudioPlayer";
 import tracks from "../tracks";
 import { createContext, useState } from "react";
+import MusicList from "./MusicList";
 
 export const TrackContext = createContext({});
 
@@ -9,7 +10,7 @@ const Player = () => {
 
   // Change the track
   const handleChangeTrack = (action) => {
-    switch (action) {
+    switch (action.type) {
       case "next": {
         setCurrentTrackIndex((currentTrackIndex + 1) % tracks.length);
         break;
@@ -18,6 +19,10 @@ const Player = () => {
         setCurrentTrackIndex(
           currentTrackIndex - 1 < 0 ? tracks.length - 1 : currentTrackIndex - 1
         );
+        break;
+      }
+      case "index": {
+        setCurrentTrackIndex(action.indexId);
         break;
       }
       default: {
@@ -33,7 +38,9 @@ const Player = () => {
         currentTrackIndex,
       }}
     >
-      <AudioPlayer track={tracks[currentTrackIndex]} />
+      <AudioPlayer />
+
+      <MusicList />
     </TrackContext.Provider>
   );
 };
